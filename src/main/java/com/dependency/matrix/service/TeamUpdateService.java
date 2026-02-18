@@ -3,6 +3,8 @@ package com.dependency.matrix.service;
 import com.dependency.matrix.dto.TeamUpdateRequest;
 import com.dependency.matrix.entity.TeamUpdate;
 
+import java.util.Optional;
+
 public interface TeamUpdateService {
 
     TeamUpdate createUpdate(
@@ -10,3 +12,4 @@ public interface TeamUpdateService {
             String username
     );
 }
+
