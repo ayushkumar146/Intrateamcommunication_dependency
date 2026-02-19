@@ -1,5 +1,6 @@
 package com.dependency.matrix.service_impl;
 
+import com.dependency.matrix.dto.TeamItemsResponse;
 import com.dependency.matrix.dto.TeamUpdateRequest;
 import com.dependency.matrix.entity.TeamUpdate;
 import com.dependency.matrix.repository.TeamUpdateRepository;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,4 +34,19 @@ public class TeamUpdateServiceImpl implements TeamUpdateService {
 
         return repository.save(update);
     }
+
+    @Override
+    public List<TeamItemsResponse> getItemsByProject(String projectName) {
+
+        return repository
+                .findByProjectName(projectName)
+                .stream()
+                .map(t -> new TeamItemsResponse(
+                        t.getTeamName(),
+                        t.getTeamType(),
+                        t.getImplementedItems()
+                ))
+                .toList();
+    }
+
 }
